@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9c5f534a-480c-4ce7-a57f-04db2a5cb9e0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/practica1.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/practica1.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +58,7 @@
       <workItem from="1614711833937" duration="642000" />
       <workItem from="1614767680170" duration="8468000" />
       <workItem from="1614858643361" duration="8235000" />
-      <workItem from="1615907296308" duration="9122000" />
+      <workItem from="1615907296308" duration="11898000" />
     </task>
     <servers />
   </component>

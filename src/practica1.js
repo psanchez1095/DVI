@@ -1,5 +1,6 @@
+//Pedro Sánchez Escribano pedros03@ucm.es
 
-//declaracion de constantes
+//Declaracion de constantes
 const CARD_NUMBER= 16;
 const CARDNAMES_ARRAY = [
     "perico",
@@ -26,14 +27,16 @@ MemoryGame = function(gs) {
 
     //Array equivalente al tablero con sus 16 cartas
     this.board=[];
-    //Variable que acumula el mensaje del juego, el cual se indicara en pantalla
+    //Atributo que acumula el mensaje del juego, el cual se indicara en pantalla
     this.gameMessage="Memory Game";
-    //Variable que acumula el numero de cartas dadas la vuelta
+    //Atributo que acumula el numero de cartas dadas la vuelta
     this.numCardsUp = 0;
-    //Variable que acumula los aciertos del jugador
+    //Atributo que acumula los aciertos del jugador
     this.hits = 0;
-
+    //Atributo booleana que indica si el juego esta en curso
     this.inGame=true;
+
+    //Atributos para guardar cada una de las cartas y el id de la primera
     this.first = null;
     this.second = null;
     this.idFirst =-1;
@@ -43,7 +46,7 @@ MemoryGame = function(gs) {
         for(let i = 0; i < CARD_NUMBER; i++) this.board.push(new MemoryGameCard(CARDNAMES_ARRAY[i]));
 
         this.board.sort(function() {
-            return Math.random() - 0.1;
+            return Math.random() - 0.3;
         })
 
         this.loop();
@@ -53,7 +56,6 @@ MemoryGame = function(gs) {
     this.draw =  () =>{
         gs.drawMessage(this.gameMessage);
         for(var i = 0; i < 16; ++i) this.board[i].draw(gs, i);
-
     }
 
     this.loop = () => {
@@ -64,7 +66,8 @@ MemoryGame = function(gs) {
 
     this.onClick = (cardId) => {
 
-            if(this.inGame && cardId>0){
+            //Si no se ha llegado al final del juegos y cardId tiene un valor valido (0...15)
+            if( this.inGame && cardId!=null && cardId>=0 ){
 
             //En caso de ser la primera carta volteada
             if(this.numCardsUp == 0) {
@@ -88,7 +91,7 @@ MemoryGame = function(gs) {
 
 
                     //Si ambas cartas tienen la misma imagen
-                    if(this.board[cardId].compareTo(this.first)) {
+                    if(c2.compareTo(c1)){
 
                         this.first.found();
                         this.second.found();
@@ -97,10 +100,13 @@ MemoryGame = function(gs) {
                         //Si ya se acertaron todas las parejas
                         if(this.hits == CARD_NUMBER/2) {
                             this.gameMessage = "¡Buena memoria,has ganado!";
-                            this.inGame = true;
+                            this.inGame = false;
                         }
                         //Si no se acertaron todas las parejas
-                        else this.gameMessage = "¡Has acertado!";
+                        else {
+                            this.gameMessage = "¡Has acertado!";
+                            that.numCardsUp=0;
+                        }
 
                     }
 
@@ -119,7 +125,6 @@ MemoryGame = function(gs) {
                         },1500);
 
                     }
-
             }
         }
     }
@@ -128,6 +133,7 @@ MemoryGame = function(gs) {
 };
 
 MemoryGameCard = function(id){
+
     //enumerado de estados
     const states ={
         BACK: "back",
@@ -135,28 +141,32 @@ MemoryGameCard = function(id){
         FOUND: "found",
     }
 
-    //Estado inicial boca abajo
+    //Atributo que guarda el estado, inicialmente boca abajo
     this.state = states.BACK;
 
-    //El nombre llega por parametro al crear la carta
+    //Atributo que guarda el nombre del sprite de la carta , se pasa por parametro al crear la carta
     this.name = id;
 
     //Voltea la carta dependiendo su estado actual
     this.flip = function() {
         ( this.state == states.UP ) ? this.state=states.BACK : this.state = states.UP; ;
     }
+
     //Cambia el estado a found
     this.found = function() {
         this.state = states.FOUND;
     }
+
     //Devuelve true si la carta tiene estado found
     this.boolFound = function() {
-        this.state == states.FOUND ? true :  false;
+        return this.state == states.FOUND;
     }
+
     //Devuelve true si las cartas tienen el mismo nombre(imagen)
     this.compareTo = (card) => {
-        this.name == card.name? true : false;
+        return this.name == card.name;
     }
+
     //Dibuja las cartas en su posicion dependiendo de su estado ( si es back la dibuja boca abajo )
     this.draw = (gs, pos) =>  {
         (this.state != states.BACK) ? gs.draw(this.name, pos) : gs.draw(states.BACK, pos);
