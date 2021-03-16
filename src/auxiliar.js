@@ -14,13 +14,13 @@ var CustomGraphicServer = function() {
 	// Tamaño de los tiles que representan las cartas
 	this.tileWidth = 250;
 	this.tileHeight = 300;
-	
+
 	// Espacio vertical para colocar el mensaje de texto
 	this.vOffset = 50;
 
 	// Información sobre los tiles
 	this.maps = { };
-	
+
 	/**
 	 * Carga una hoja de sprites y ejecuta la función de callback
 	 * @param  {String}   spriteSrc  Imagen que contiene los sprites
@@ -68,7 +68,8 @@ var CustomGraphicServer = function() {
 		console.log({"r":row, "c":col});
 		if (row<4 && col<4) {
 			card = row*4+col;
-			console.log(card);
+
+
 		}
 		return card;
 	};
@@ -101,16 +102,16 @@ var CustomGraphicServer = function() {
 var InitCanvas = function(container, width, height, className) {
 	var containerElement = document.getElementById(container);
 	canvas = document.createElement("canvas");
-    // Handle error here for old browsers
-    canvas.width = width;
-    canvas.height = height;
-    canvas.className = className;
-    ctx = canvas.getContext("2d");
-    if(!ctx){
+	// Handle error here for old browsers
+	canvas.width = width;
+	canvas.height = height;
+	canvas.className = className;
+	ctx = canvas.getContext("2d");
+	if(!ctx){
 		window.alert("Update your browser!");
-    }
-    containerElement.appendChild(canvas);
-    gs = new CustomGraphicServer();
+	}
+	containerElement.appendChild(canvas);
+	gs = new CustomGraphicServer();
 };
 
 /**
@@ -121,15 +122,15 @@ function start() {
 	InputServer();
 	gs.load("img/sprites.png",
 		{
-		"perico": {"x":0,"y":0,"w":250,"h":300},
-		"mortadelo": {"x":250,"y":0,"w":250,"h":300},
-		"fernandomartin": {"x":500,"y":0,"w":250,"h":300},
-		"sabotaje": {"x":0,"y":300,"w":250,"h":300},
-		"phantomas": {"x":250,"y":300,"w":250,"h":300},
-		"poogaboo": {"x":500,"y":300,"w":250,"h":300},
-		"sevilla": {"x":0,"y":600,"w":250,"h":300},
-		"abadia": {"x":250,"y":600,"w":250,"h":300},
-		"back": {"x":500,"y":600,"w":250,"h":300}
+			"perico": {"x":0,"y":0,"w":250,"h":300},
+			"mortadelo": {"x":250,"y":0,"w":250,"h":300},
+			"fernandomartin": {"x":500,"y":0,"w":250,"h":300},
+			"sabotaje": {"x":0,"y":300,"w":250,"h":300},
+			"phantomas": {"x":250,"y":300,"w":250,"h":300},
+			"poogaboo": {"x":500,"y":300,"w":250,"h":300},
+			"sevilla": {"x":0,"y":600,"w":250,"h":300},
+			"abadia": {"x":250,"y":600,"w":250,"h":300},
+			"back": {"x":500,"y":600,"w":250,"h":300}
 		},
 		function() {
 			game = new MemoryGame(gs);
@@ -139,8 +140,8 @@ function start() {
 
 /**
  * Función que inicia las funciones responsables de interpretar los eventos de ratón y de touch
- * Cuando hacemos click con el ratón en el canvas resuelve en qué carta estamos pulsando y llama a 
- * la función onClick de MemoryGame, devolviendo el número de la carta en la que se ha pulsado (ver 
+ * Cuando hacemos click con el ratón en el canvas resuelve en qué carta estamos pulsando y llama a
+ * la función onClick de MemoryGame, devolviendo el número de la carta en la que se ha pulsado (ver
  * el método resolveCard del CustomGraphicServer)
  */
 var InputServer = function() {
@@ -155,15 +156,15 @@ var InputServer = function() {
 
 	var handleMouse = function(evt) {
 		if (hasTouch)
-            return;
+			return;
 		clientToCard(evt.clientX, evt.clientY);
 	};
 
 	var handleTouch = function(evt) {
-        hasTouch = true;
-        clientToCard(evt.touches[0].pageX, evt.touches[0].pageY);
-        evt.preventDefault();
-    };
+		hasTouch = true;
+		clientToCard(evt.touches[0].pageX, evt.touches[0].pageY);
+		evt.preventDefault();
+	};
 
 	window.addEventListener("click", handleMouse);
 	window.addEventListener("touchstart", handleTouch);
@@ -172,5 +173,7 @@ var InputServer = function() {
 
 // Finalmente ejecutaremos la función start cuando se haya cargado la página
 window.addEventListener("load", start);
+
+
 
 
