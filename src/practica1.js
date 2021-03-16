@@ -27,13 +27,12 @@ MemoryGame = function(gs) {
     //Array equivalente al tablero con sus 16 cartas
     this.board=[];
     //Variable que acumula el mensaje del juego, el cual se indicara en pantalla
-    this.gameMessage="";
+    this.gameMessage="Memory Game";
     //Variable que acumula el numero de cartas dadas la vuelta
     this.numCardsUp = 0;
     //Variable que acumula los aciertos del jugador
     this.hits = 0;
-    //Variable que guarda el mensaje del juego mostrado por pantalla
-    this.gameMessage="Memory Game";
+
     this.inGame=true;
     this.first = null;
     this.second = null;
@@ -65,7 +64,8 @@ MemoryGame = function(gs) {
 
     this.onClick = (cardId) => {
 
-            if(this.inGame){
+            if(this.inGame && cardId>0){
+
             //En caso de ser la primera carta volteada
             if(this.numCardsUp == 0) {
                 this.numCardsUp++;
@@ -159,9 +159,7 @@ MemoryGameCard = function(id){
     }
     //Dibuja las cartas en su posicion dependiendo de su estado ( si es back la dibuja boca abajo )
     this.draw = (gs, pos) =>  {
-        if (this.state != states.BACK) gs.draw(this.name, pos);
-        else  gs.draw(states.BACK, pos);
-
+        (this.state != states.BACK) ? gs.draw(this.name, pos) : gs.draw(states.BACK, pos);
     }
 
 };
