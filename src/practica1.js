@@ -21,27 +21,32 @@ const CARDNAMES_ARRAY = [
     "abadia",
 ]
 
-var MemoryGame = MemoryGame || {};
-
 MemoryGame = function(gs) {
 
     //Array equivalente al tablero con sus 16 cartas
-    this.board=[];
-    //Atributo que acumula el mensaje del juego, el cual se indicara en pantalla
-    this.gameMessage="Memory Game";
+    this.board;
     //Atributo que acumula el numero de cartas dadas la vuelta
-    this.numCardsUp = 0;
+    this.numCardsUp;
     //Atributo que acumula los aciertos del jugador
-    this.hits = 0;
+    this.hits;
     //Atributo booleana que indica si el juego esta en curso
-    this.inGame=true;
+    this.inGame;
 
     //Atributos para guardar cada una de las cartas y el id de la primera
-    this.first = null;
-    this.second = null;
-    this.idFirst =-1;
+    this.first;
+    this.second;
+    this.idFirst;
 
     this.initGame = () => {
+
+        this.board=[];
+        this.gameMessage="Memory Game";
+        this.numCardsUp = 0;
+        this.hits = 0;
+        this.inGame=true;
+        this.first = null;
+        this.second = null;
+        this.idFirst =-1;
 
         for(let i = 0; i < CARD_NUMBER; i++) this.board.push(new MemoryGameCard(CARDNAMES_ARRAY[i]));
 
@@ -86,16 +91,17 @@ MemoryGame = function(gs) {
 
                 //Usamos that para tener una referencia del objeto clickado
                 var that = this;
-                c1=this.first;
-                c2=this.second;
+                card1=this.first;
+                card2=this.second;
 
 
                     //Si ambas cartas tienen la misma imagen
-                    if(c2.compareTo(c1)){
+                    if(card2.compareTo(card1)){
 
-                        this.first.found();
-                        this.second.found();
+                        card1.found();
+                        card2.found();
                         this.hits++;
+
 
                         //Si ya se acertaron todas las parejas
                         if(this.hits == CARD_NUMBER/2) {
@@ -116,17 +122,22 @@ MemoryGame = function(gs) {
                         this.gameMessage = "¡Has fallado!";
 
                         setTimeout(function(){
-                            c2.flip();
+                            card2.flip();
                         },1000);
 
                         setTimeout(function(){
-                            c1.flip();
+                            card1.flip();
                             that.numCardsUp=0;
-                        },1500);
+                        },1300);
 
                     }
             }
         }
+            //Si el juego ha finalizado puedes volver a jugar pulsando sobre la pantalla
+            else if(!this.inGame) {
+                this.initGame();
+            }
+
     }
 
 
