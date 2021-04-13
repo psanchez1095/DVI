@@ -75,7 +75,8 @@ MemoryGame = function(gs) {
             if( this.inGame && cardId!=null && cardId>=0 ){
 
             //En caso de ser la primera carta volteada
-            if(this.numCardsUp == 0) {
+                var then = this;
+            if( !then.board[cardId].boolFound() && this.numCardsUp == 0  ) {
                 this.numCardsUp++;
                 this.first = this.board[cardId];
                 this.first.flip();
@@ -139,6 +140,7 @@ MemoryGame = function(gs) {
             }
 
     }
+    //frog: { sx: 120, sy: 340, w: 40, h: 48, frames: 1 }
 
 
 };
