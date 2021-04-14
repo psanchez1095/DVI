@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
 
 body{
-	background-image: url("../img/pexels-andre-moura-3293037.jpg");
+	background-image: url("../img/backgroundHTML.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -10,7 +10,6 @@ body{
 	margin:0 auto;
 	margin-left: 35%;
 }
-
 canvas{
 	border: 20px solid whitesmoke;
 	border-radius: 5%;

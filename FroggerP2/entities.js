@@ -1,5 +1,5 @@
 
-/// CLASE PADRE SPRITE
+///Sprite, de cual heredan casi todos los objetos del juego
 var Sprite = function () { }
 
 Sprite.prototype.setup = function (sprite, props) {
@@ -27,75 +27,55 @@ Sprite.prototype.hit = function (damage) {
     this.board.remove(this);
 }
 
+//Fondo de Pantalla Juego
+var BackGround = function () {
+    this.setup("background", {x:0,y:0});
+    this.step = function (dt) {}
+}
+
+BackGround.prototype = new Sprite();
+BackGround.prototype.type = OBJECT_BOARD;
+
+//Logo Frogger
+var Logo = function () {
+    this.setup("title", {x: Game.width/4.5, y: Game.height/6});
+    this.step = function (dt) {}
+}
+
+Logo.prototype = new Sprite();
+Logo.prototype.type = OBJECT_BOARD;
+
 // PLAYER
 
-var PlayerFrog = function (winGame) {
+var PlayerFrog = function () {
 
     this.setup("frog", { vx: 0, frame: 0});
 
     this.x = Game.width / 2 -20 - this.w / 2;
     this.y = Game.height - this.h - 5;
-    this.onTrunk = false;
-    this.onTurtle = false;
-    this.onLeaf = false;
-    this.subFrame = 0;
-    this.jumping = false;
-    this.up = false;
-    this.down = false;
-    this.tiempo = 0;
-    PlayerFrog.muerte = false;
 
-    this.isOnLeaf = function (vt) {
-        this.vx = vt;
-        this.onLeaf = true;
-    }
-    this.isOnTrunk = function (vt) {
-        this.vx = vt;
-        this.onTrunk = true;
-    }
-    this.isOnTurtle = function (vt){
-        this.vx = vt;
-        this.onTurtle = true;
-    }
+    this.tiempo = 0;
 
     this.step = function (dt) {
 
+        //Si esta situado encima de otro objeto se calcula la posicion x en funcion de la velocidad del otro objeto
+        this.isOnLeaf = function (otherSpeed) {
+            this.vx = otherSpeed;
+            this.x += this.vx * dt
+        }
+        this.isOnTrunk = function (otherSpeed) {
+            this.vx = otherSpeed;
+            this.x += this.vx * dt
+        }
+        this.isOnTurtle = function (otherSpeed){
+            this.vx = otherSpeed;
+            this.x += this.vx * dt
+        }
+
         this.tiempo += dt;
 
-        if(this.jumping){
 
-            if(this.tiempo > 0.02 && this.subFrame < 6){
-                this.frame = this.subFrame++;
-                this.tiempo = 0;
-            }
-            else if(this.subFrame === 6){
-                this.subFrame = 0;
-                this.frame = this.subFrame;
-                this.jumping = false;
-
-                if(this.down) {
-                    this.y += 48;
-                    this.down = false;
-                }
-                else if(this.up) {
-                    this.y -= 48;
-                    Points.puntos += 10;
-                    this.up = false;
-                }
-
-                else { this.y += 0; }
-                if (this.y < 0) { this.y = 0; }
-                else if (this.y > Game.height - this.h) {
-                    this.y = Game.height - this.h;
-                }
-            }
-        }
-        if(this.onTrunk)this.x += this.vx * dt;
-        if(this.onTurtle)this.x += this.vx * dt;
-        if(this.onLeaf)this.x += this.vx * dt;
-
-
-        if(!Game.pressed && !this.jumping) {
+        if(!Game.pressed) {
 
             if (Game.keys['left']) {
 
@@ -113,51 +93,49 @@ var PlayerFrog = function (winGame) {
             }
             else if (Game.keys['down']) {
 
+                if(this.y== Game.height - sprites["frog"].h - 5) {} //Si esta en la posicion inicial no hace nada
+                else this.y += 48;
+                if (this.y > Game.height - this.h) this.y = Game.height - this.h;
+
                 Game.pressed = true;
-                this.down = true;
-                this.jumping = true;
-                this.frame = this.subFrame++;
 
             }
 
             else if (Game.keys['up']) {
 
+                this.y -= 48;
+                if (this.y < 0)  this.y = 0;
+
+                Points.puntos += 10;
                 Game.pressed = true;
-                this.up = true;
-                this.jumping = true;
-                this.frame = this.subFrame++;
 
             }
 
         }
 
-        var isCollision = this.board.collide(this, OBJECT_ENEMY);
-        var objeto = this.board.collide(this,OBJECT_TRANSPORT);
-        var win = this.board.collide(this, OBJECT_FINISH);
+        var isCollisionEnemy = this.board.collide(this, OBJECT_ENEMY);
+        var isCollisionTransport = this.board.collide(this,OBJECT_TRANSPORT);
+        var playerFrogWin = this.board.collide(this, OBJECT_FINISH);
 
-        if(win) winGame(Points.puntos);
+        if(playerFrogWin) winGame(Points.puntos);
 
         else{
-            if(isCollision && !objeto){
+
+            if(isCollisionEnemy && !isCollisionTransport){
 
                 if (this.board.remove(this)) {
-                    this.board.add(new Death(this.x + this.w/2,
-                        this.y + this.h/2));
+                    this.board.add(new Death(this.x + this.w/2, this.y + this.h/2));
                     Life.muerte = true;
                 }
             }
 
             if(PlayerFrog.muerte) {
-
                 this.board.remove(this);
                 this.board.add(new Death(this.x + this.w/2, this.y + this.h/2));
                 Life.muerte = true;
 
             }
             this.vx = 0;
-            this.onTrunk = false;
-            this.onTurtle = false;
-            this.onLeaf= false;
         }
     }
 }
@@ -172,6 +150,49 @@ PlayerFrog.prototype.hit = function (damage) {
         Life.muerte = true;
     }
 }
+
+//Tronco
+var Trunk = function (object) {
+    this.setup(object.sprite, object);
+}
+Trunk.prototype = new Sprite();
+Trunk.prototype.type =OBJECT_TRANSPORT;
+Trunk.prototype.step = function (dt) {
+
+    this.t += dt;
+    this.vy = 0;
+    this.vx = this.V;
+    this.x += this.vx * dt;
+
+    //Si esta fuera del canvas lo borramos de board
+    if (this.y > Game.height || this.x < -this.w || this.x > Game.width ) this.board.remove(this);
+
+    //Si hay collision con la rana, la rana se sube al tronco
+    var isCollision = this.board.collide(this, OBJECT_PLAYER);
+    if (isCollision) isCollision.isOnTrunk(this.vx);
+
+}
+
+//Vehiculo
+var Vehicle = function(object){
+    this.setup(object.sprite, object);
+}
+Vehicle.prototype = new Sprite();
+Vehicle.prototype.type = OBJECT_ENEMY;
+
+Vehicle.prototype.step = function (dt) {
+
+    this.vx = this.V;
+    this.x += this.vx * dt;
+
+    if (this.y > Game.height || this.x < -this.w || this.x > Game.width) this.board.remove(this);
+
+    // Hace las colisiones de la rana
+    var collision = this.board.collide(this, OBJECT_PLAYER);
+    if (collision) collision.hit(this.damage);
+
+}
+
 
 //Hoja
 var Leaf = function (object) {
@@ -192,26 +213,6 @@ Leaf.prototype.step = function (dt) {
 
 
 }
-//Tronco
-var Trunk = function (object) {
-    this.setup(object.sprite, object);
-}
-Trunk.prototype = new Sprite();
-Trunk.prototype.type =OBJECT_TRANSPORT;
-Trunk.prototype.step = function (dt) {
-    this.t += dt;
-    this.vy = 0;
-    this.vx = this.V;
-    this.x += this.vx * dt;
-
-    //Si esta fuera del canvas lo borramos de board
-    if (this.y > Game.height || this.x < -this.w || this.x > Game.width ) this.board.remove(this);
-
-    //Si hay collision con la rana, la rana se sube al tronco
-    var isCollision = this.board.collide(this, OBJECT_PLAYER);
-    if (isCollision) isCollision.isOnTrunk(this.vx);
-
-}
 
 //Tortuga
 var Turtle = function (object) {
@@ -219,8 +220,6 @@ var Turtle = function (object) {
     this.setup(object.sprite, object);
     this.subFrame = 0;
     this.tiempo = 0;
-    this.up = true;
-    this.buceo = false;
 
 }
 Turtle.prototype = new Sprite();
@@ -230,62 +229,35 @@ Turtle.prototype.step = function (dt) {
 
     this.tiempo += dt;
 
-    if(this.tiempo > 0.2 && !this.buceo && this.up){
-        if(this.subFrame === 8) this.buceo = true;
-        else{
-            this.frame = this.subFrame++;
-            this.tiempo = 0;
-        }
-    }
-    else if(this.buceo && this.tiempo > 0.9) {
-
-        this.tiempo = 0;
-        this.up = false;
-        this.buceo = false;
-        this.frame = this.subFrame = 6;
-    }
-    else if(this.tiempo > 0.15 && !this.buceo && !this.up){
-
-        if(this.subFrame === 0) this.up = true;
-        else{
-            this.frame = this.subFrame--;
-            this.tiempo = 0;
-        }
-    }
-
     this.vx = this.V;
     this.x += this.vx * dt;
 
     if ( this.x < -this.w || this.x > Game.width) this.board.remove(this);
 
     var collision = this.board.collide(this, OBJECT_PLAYER);
-    if (collision && !this.buceo) collision.isOnTurtle(this.V);
-    else if(collision && this.buceo) collision.hit();
+    if (collision) collision.isOnTurtle(this.V);
+    else if(collision) collision.hit();
 }
 
-var Car = function(object){
-
+//Agua
+var Water = function(object){
     this.setup(object.sprite, object);
 }
-Car.prototype = new Sprite();
-Car.prototype.type = OBJECT_ENEMY;
+Water.prototype = new Sprite();
+Water.prototype.type = OBJECT_ENEMY;
+Water.prototype.step = function(){};
+Water.prototype.draw = function(){};
 
-Car.prototype.step = function (dt) {
+//Rana Muerta
+var Death = function(cordX,cordY) {
+    this.setup("frog_dead", { frame: 0 });
+    this.x = cordX - this.w/2;
+    this.y = cordY - this.h/2;
+};
 
-    this.vx = this.V;
-    this.x += this.vx * dt;
+Death.prototype = new Sprite();
+Death.prototype.step = function(dt) {};
 
-    if (this.y > Game.height ||
-        this.x < -this.w ||
-        this.x > Game.width) {
-        this.board.remove(this);
-    }
-
-    // Hace las colisiones de la rana
-    var collision = this.board.collide(this, OBJECT_PLAYER);
-    if (collision) collision.hit(this.damage);
-
-}
 
 //Meta
 var Meta = function(object){
@@ -298,48 +270,27 @@ Meta.prototype.step = function (dt) {
 
 }
 
-//Rana Muerta
-var Death = function(centerX,centerY) {
-    this.setup("frog_dead", { frame: 0 });
-    this.x = centerX - this.w/2;
-    this.y = centerY - this.h/2;
-};
-
-Death.prototype = new Sprite();
-Death.prototype.step = function(dt) {};
-
-//Fondo de Pantalla Juego
-var BackGround = function () {
-    this.setup("background", {x:0,y:0});
-    this.step = function (dt) {}
-}
-
-BackGround.prototype = new Sprite();
-BackGround.prototype.type = OBJECT_BOARD;
 
 //Creador de objetos de juego
 var Spawner = function () {
-
     for ( var patron in patrones) patron.lifetime = 0;
     this.tiempo = 0;
-
 }
 
 Spawner.prototype.step = function (dt) {
 
     this.tiempo += dt;
-
+    console.log(this.tiempo)
     for(let i = 0; i < patrones.length; i++){
 
         if(this.tiempo > patrones[i].lifetime){
 
             patrones[i].lifetime += (patrones[i].interval);
 
-            if(patrones[i].family == "vehicle") this.board.add(new Car(vehicles[patrones[i].type]));
+            if(patrones[i].family == "vehicle") this.board.add(new Vehicle(vehicles[patrones[i].type]));
             else if (patrones[i].family == "trunk") this.board.add(new Trunk(platforms[patrones[i].type]));
             else if (patrones[i].family == "turtle") this.board.add(new Turtle(platforms[patrones[i].type]))
-            else if (patrones[i].type == "leaf")this.board.add(new Leaf(platforms[patrones[i].type]));
-
+            else this.board.add(new Leaf(platforms[patrones[i].type]));
 
         }
     }
@@ -347,16 +298,6 @@ Spawner.prototype.step = function (dt) {
 }
 Spawner.prototype.draw = function () {};
 
-//Logo Frogger
-var Logo = function () {
-
-    this.setup("title", {x: Game.width/4.5, y: Game.height/6});
-    this.step = function (dt) {}
-
-}
-
-Logo.prototype = new Sprite();
-Logo.prototype.type = OBJECT_BOARD;
 
 //Tiempo Transcurrido
 var Time = function () {
@@ -417,7 +358,9 @@ var Points = function(puntos) {
 
     Points.puntos =puntos;
 
-    this.step = (dt) => {}
+    this.step = (dt) => {
+        if(!Game.started) Points.puntos=0;
+    }
     this.draw =  (ctx) => {
 
         if(Game.started) {
@@ -430,10 +373,4 @@ var Points = function(puntos) {
 }
 
 
-var Water = function(object){
-    this.setup(object.sprite, object);
-}
-Water.prototype = new Sprite();
-Water.prototype.type = OBJECT_ENEMY;
-Water.prototype.step = function(){};
-Water.prototype.draw = function(){};
+

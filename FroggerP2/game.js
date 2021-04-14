@@ -87,9 +87,13 @@ var playGame = () => {
     var board = new GameBoard();
     board.add(new Meta(final["end"]));
     board.add(new Water(vehicles["water"]));
-    board.add(new PlayerFrog(winGame));
+    board.add(new PlayerFrog());
     board.add(new Spawner());
     Game.setBoard(2, board);
+
+    //Cuarta Capa para mensajes de victoria o derrota
+    var board = new GameBoard();
+    Game.setBoard(3, board);
 
 
 }
@@ -143,7 +147,7 @@ var loseGame = function (points)  {
 //Si el jugador pierde una vida reiniciamos el juego manteniendo las estadisticas, solo cambiamos la capa de objetos
 var restart = function (live) {
     Game.started=false;
-    Game.setBoard(2,new TitleScreen("Now you have " + live + " lives!", "Press space to continue", playGame));
+    Game.setBoard(3,new TitleScreen("Now you have " + live + " lives!", "Press space to continue", playGame));
 };
 
 

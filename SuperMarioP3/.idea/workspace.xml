@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5e0be60-870a-42cf-97a0-22ed9e021b85" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../FroggerP2.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../FroggerP2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FroggerP2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FroggerP2/alumnos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../FroggerP2/alumnos.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FroggerP2/css/frogger.css" beforeDir="false" afterPath="$PROJECT_DIR$/../FroggerP2/css/frogger.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../FroggerP2/entities.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FroggerP2/entities.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FroggerP2/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FroggerP2/game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FroggerP2/img/pexels-andre-moura-3293037.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../FroggerP2/img/backgroundHTML.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +35,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FroggerP2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -53,6 +58,7 @@
       <option name="presentableId" value="Default" />
       <updated>1618402077148</updated>
       <workItem from="1618402078398" duration="6833000" />
+      <workItem from="1618437550088" duration="13000" />
     </task>
     <servers />
   </component>
@@ -69,5 +75,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

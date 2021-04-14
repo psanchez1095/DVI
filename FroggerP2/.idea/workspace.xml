@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d85ee1c-4974-4df2-8b6a-a16d08de9f44" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../FroggerP2.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine.js" beforeDir="false" afterPath="$PROJECT_DIR$/engine.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alumnos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/alumnos.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/frogger.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/frogger.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entities.js" beforeDir="false" afterPath="$PROJECT_DIR$/entities.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/pexels-andre-moura-3293037.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/backgroundHTML.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +28,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Frogger_Ronny/Frogger" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SuperMarioP3" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -54,7 +56,7 @@
       <updated>1618238964401</updated>
       <workItem from="1618238965752" duration="15788000" />
       <workItem from="1618305799107" duration="28396000" />
-      <workItem from="1618405593616" duration="10129000" />
+      <workItem from="1618405593616" duration="18827000" />
     </task>
     <servers />
   </component>
