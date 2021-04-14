@@ -1,64 +1,3 @@
-var sprites = {
-    background: { sx: 422, sy: 0, w: 550, h: 625, frames: 1 },
-    title: { sx: 10, sy: 400, w: 314, h: 225, frames: 1},
-    frog: { sx: 0 , sy: 346, w: 40, h: 24, frames: 6 },
-    frog_dead: {sx:354 , sy:125 , w:52 , h:39, frames:1 },
-    turtle:{sx:5,sy:288,w:51,h:43, frames: 7},
-    trailer_brown: {sx: 148, sy: 62, w: 180 , h: 45, frames: 1},
-    fire_engine: {sx: 7, sy: 62, w: 122, h: 45, frames: 1},
-    car_green: {sx: 102, sy: 0,w: 100, h: 50, frames: 1},
-    car_blue: {sx: 8, sy: 4, w:92 , h: 50 , frames: 1},
-    car_yellow: {sx: 212 , sy: 2, w: 105 , h: 50, frames: 1},
-    tree_medium: {sx: 10, sy: 123, w:190 , h: 40 , frames: 1},
-    tree_small: {sx: 270, sy: 173, w:130 , h: 40 , frames: 1},
-    tree_big: {sx: 9, sy: 171, w:247 , h: 40 , frames: 1},
-    //water: {sx:247,sy:480,w:550,h:242, frames: 1},
-    end:{sx:0,sy:0,w:550,h:50, frames: 1},
-    leaf: {sx: 0, sy: 232, w: 52, h: 45, frames: 1},
-};
-
-var patrones = [
-    {inicio: 0, intervalo: 6, family: "vehicle", tipo: "trailer_brown"},   // Camion marron
-    {inicio: 0, intervalo: 5.5,family:"vehicle", tipo: "fire_engine"},  // Ambulancia
-    {inicio: 0, intervalo: 5, family: "vehicle", tipo: "car_yellow"},  // Coche amarillo
-    {inicio: 0, intervalo: 4, family: "vehicle", tipo: "car_green"},   // Coche verde
-    {inicio: 0, intervalo: 5, family: "vehicle", tipo: "car_blue"},      // Coche azul
-    {inicio: 0, intervalo: 5, family: "turtle",   tipo: "turtle1"},         // Tortuga
-    {inicio: 0, intervalo: 9, family: "turtle",   tipo: "turtle2"},         // Tortuga
-    {inicio: 0, intervalo: 4, family: "trunk",    tipo: "tree_small"},   // Tronco pequeño
-    {inicio: 0, intervalo: 5, family: "trunk",    tipo: "tree_medium"},   // Tronco mediano
-    {inicio: 0, intervalo: 6, family: "trunk",    tipo: "tree_big"},   // Tronco grande
-    {inicio: 0, intervalo: 4, family: "leaf",     tipo: "leaf"},   // hoja
-]
-
-
-
-// Array con todos los vehiculos del juego
-var vehicles = {
-
-    trailer_brown: {x: 400, y: 527, sprite: "trailer_brown", health: 10, V: -100},
-    fire_engine:{x: 10, y: 480, sprite: "fire_engine",health: 10, V:100},
-    car_green: {x: 10, y: 428, sprite: "car_green", health: 20, V: 60},
-    car_blue: {x:10, y: 335, sprite: "car_blue", health: 5, V: 75},
-    car_yellow: {x: 10, y: 379, sprite: "car_yellow", health: 10, V: 150},
-    //water:{x: 0, y: 49, sprite: "water", health: 10},
-
-};
-
-// Objetos del agua, tales como la tortuga, los diferentes tipos de troncos
-var platforms = {
-    turtle1: {x: 250, y: 200, sprite: "turtle", health: 10, V: 20, frame: 0},
-    tree_small: {x: 467, y: 248, sprite: "tree_small", health: 10, V: -50},
-    tree_medium: {x:467, y: 150, sprite: "tree_medium", health: 10, V: -50},
-    tree_big: {x:467, y: 50, sprite: "tree_big", health: 10, V: -50},
-    turtle2: {x: 480, y: 100, sprite: "turtle", health: 10, V: 20, frame: 0},
-    leaf: {x:0, y: 200, sprite: "leaf", health: 10, V: 20}
-
-};
-var final = {
-    end:{x: 0, y: 0, sprite: "end", health: 10, V: 20, frame: 0}
-}
-
 
 /// CLASE PADRE SPRITE
 var Sprite = function () { }
@@ -92,7 +31,7 @@ Sprite.prototype.hit = function (damage) {
 
 var PlayerFrog = function (winGame) {
 
-    this.setup('frog', { vx: 0, frame: 0});
+    this.setup("frog", { vx: 0, frame: 0});
 
     this.x = Game.width / 2 -20 - this.w / 2;
     this.y = Game.height - this.h - 5;
@@ -156,26 +95,38 @@ var PlayerFrog = function (winGame) {
         if(this.onLeaf)this.x += this.vx * dt;
 
 
-        if(!Game.pulsado && !this.jumping) {
+        if(!Game.pressed && !this.jumping) {
 
             if (Game.keys['left']) {
-                Game.pulsado = true;
+
+                Game.pressed = true;
                 this.x -= 40;
                 if (this.x < 0) this.x = 0 + 10;
-            }else if (Game.keys['right']) {
-                Game.pulsado = true;
+
+            }
+            else if (Game.keys['right']) {
+
+                Game.pressed = true;
                 this.x += 40;
                 if (this.x > Game.width - this.w) this.x = Game.width - (this.w + 10);
-            }else if (Game.keys['down']) {
-                Game.pulsado = true;
+
+            }
+            else if (Game.keys['down']) {
+
+                Game.pressed = true;
                 this.down = true;
                 this.jumping = true;
                 this.frame = this.subFrame++;
-            }else if (Game.keys['up']) {
-                Game.pulsado = true;
+
+            }
+
+            else if (Game.keys['up']) {
+
+                Game.pressed = true;
                 this.up = true;
                 this.jumping = true;
                 this.frame = this.subFrame++;
+
             }
 
         }
@@ -184,10 +135,11 @@ var PlayerFrog = function (winGame) {
         var objeto = this.board.collide(this,OBJECT_TRANSPORT);
         var win = this.board.collide(this, OBJECT_FINISH);
 
-        if(win) winGame(Points.puntos, Life.lives);
+        if(win) winGame(Points.puntos);
+
         else{
             if(isCollision && !objeto){
-                //pierde
+
                 if (this.board.remove(this)) {
                     this.board.add(new Death(this.x + this.w/2,
                         this.y + this.h/2));
@@ -200,6 +152,7 @@ var PlayerFrog = function (winGame) {
                 this.board.remove(this);
                 this.board.add(new Death(this.x + this.w/2, this.y + this.h/2));
                 Life.muerte = true;
+
             }
             this.vx = 0;
             this.onTrunk = false;
@@ -220,9 +173,6 @@ PlayerFrog.prototype.hit = function (damage) {
     }
 }
 
-
-
-
 //Hoja
 var Leaf = function (object) {
     this.setup(object.sprite, object);
@@ -233,10 +183,7 @@ Leaf.prototype.type =OBJECT_TRANSPORT;
 Leaf.prototype.step = function (dt) {
 
     this.vx = this.V;
-    this.vy = 0;
     this.x += this.vx * dt;
-    this.y += this.vy * dt;
-    this.tiempo = 0;
 
     if (this.x > 200) this.board.remove(this);
 
@@ -246,24 +193,23 @@ Leaf.prototype.step = function (dt) {
 
 }
 //Tronco
-var Trunk = function (blueprint) {
-    this.setup(blueprint.sprite, blueprint);
+var Trunk = function (object) {
+    this.setup(object.sprite, object);
 }
 Trunk.prototype = new Sprite();
 Trunk.prototype.type =OBJECT_TRANSPORT;
 Trunk.prototype.step = function (dt) {
-
-    this.vx = this.V;
+    this.t += dt;
     this.vy = 0;
+    this.vx = this.V;
     this.x += this.vx * dt;
-    this.y += this.vy * dt;
 
-
+    //Si esta fuera del canvas lo borramos de board
     if (this.y > Game.height || this.x < -this.w || this.x > Game.width ) this.board.remove(this);
 
+    //Si hay collision con la rana, la rana se sube al tronco
     var isCollision = this.board.collide(this, OBJECT_PLAYER);
-    if (isCollision) isCollision.isOnTrunk(this.V);
-
+    if (isCollision) isCollision.isOnTrunk(this.vx);
 
 }
 
@@ -308,11 +254,9 @@ Turtle.prototype.step = function (dt) {
     }
 
     this.vx = this.V;
-    this.vy = 0;
     this.x += this.vx * dt;
-    this.y += this.vy * dt;
 
-    if (this.y > Game.height || this.x < -this.w || this.x > Game.width) this.board.remove(this);
+    if ( this.x < -this.w || this.x > Game.width) this.board.remove(this);
 
     var collision = this.board.collide(this, OBJECT_PLAYER);
     if (collision && !this.buceo) collision.isOnTurtle(this.V);
@@ -329,9 +273,8 @@ Car.prototype.type = OBJECT_ENEMY;
 Car.prototype.step = function (dt) {
 
     this.vx = this.V;
-    this.vy = 0;
     this.x += this.vx * dt;
-    this.y += this.vy * dt;
+
     if (this.y > Game.height ||
         this.x < -this.w ||
         this.x > Game.width) {
@@ -342,19 +285,8 @@ Car.prototype.step = function (dt) {
     var collision = this.board.collide(this, OBJECT_PLAYER);
     if (collision) collision.hit(this.damage);
 
-
 }
-//tronco rana y agua
-var Water = function(object){
-    this.setup(object.sprite, object);
 
-}
-Water.prototype = new Sprite();
-Water.prototype.type = OBJECT_ENEMY;
-Water.prototype.draw = function(){};
-Water.prototype.step = function (dt) {
-
-}
 //Meta
 var Meta = function(object){
     this.setup(object.sprite, object);
@@ -366,9 +298,7 @@ Meta.prototype.step = function (dt) {
 
 }
 
-
-///// MUERTE DE LA RANA
-
+//Rana Muerta
 var Death = function(centerX,centerY) {
     this.setup("frog_dead", { frame: 0 });
     this.x = centerX - this.w/2;
@@ -376,25 +306,21 @@ var Death = function(centerX,centerY) {
 };
 
 Death.prototype = new Sprite();
+Death.prototype.step = function(dt) {};
 
-Death.prototype.step = function(dt) {
-};
-
-//BACKGROUND
+//Fondo de Pantalla Juego
 var BackGround = function () {
-
     this.setup("background", {x:0,y:0});
-
     this.step = function (dt) {}
-
 }
 
 BackGround.prototype = new Sprite();
 BackGround.prototype.type = OBJECT_BOARD;
 
+//Creador de objetos de juego
 var Spawner = function () {
 
-    for ( var patron in patrones) patron.inicio = 0;
+    for ( var patron in patrones) patron.lifetime = 0;
     this.tiempo = 0;
 
 }
@@ -403,17 +329,16 @@ Spawner.prototype.step = function (dt) {
 
     this.tiempo += dt;
 
-    for(var i = 0; i < patrones.length; i++){
+    for(let i = 0; i < patrones.length; i++){
 
-        if(this.tiempo > patrones[i].inicio){
+        if(this.tiempo > patrones[i].lifetime){
 
-            var tAleatorio = Math.round(Math.random()*10) / 5;
-            patrones[i].inicio += patrones[i].intervalo + tAleatorio;
+            patrones[i].lifetime += (patrones[i].interval);
 
-            if(patrones[i].family == "vehicle") this.board.add(new Car(vehicles[patrones[i].tipo]));
-            else if (patrones[i].family == "trunk") this.board.add(new Trunk(platforms[patrones[i].tipo]));
-            else if (patrones[i].family == "turtle") this.board.add(new Turtle(platforms[patrones[i].tipo]))
-            else if (patrones[i].tipo == "leaf")this.board.add(new Leaf(platforms[patrones[i].tipo]));
+            if(patrones[i].family == "vehicle") this.board.add(new Car(vehicles[patrones[i].type]));
+            else if (patrones[i].family == "trunk") this.board.add(new Trunk(platforms[patrones[i].type]));
+            else if (patrones[i].family == "turtle") this.board.add(new Turtle(platforms[patrones[i].type]))
+            else if (patrones[i].type == "leaf")this.board.add(new Leaf(platforms[patrones[i].type]));
 
 
         }
@@ -425,11 +350,7 @@ Spawner.prototype.draw = function () {};
 //Logo Frogger
 var Logo = function () {
 
-    this.setup("title", {
-        x: Game.width/4.5,
-        y: Game.height/6,
-    });
-
+    this.setup("title", {x: Game.width/4.5, y: Game.height/6});
     this.step = function (dt) {}
 
 }
@@ -443,19 +364,25 @@ var Time = function () {
     this.tiempoPartida = 90;
 
     this.step = function (dt) {
-        if (this.tiempoPartida > 0) this.tiempoPartida -= dt;
-        else PlayerFrog.muerte = true;
+        if(Game.started) {
+            if (this.tiempoPartida > 0) this.tiempoPartida -= dt;
+            else PlayerFrog.muerte = true;
+        }
+        else this.tiempoPartida = 90;
     }
 
     this.draw =  function(ctx){
-
-        Game.ctx.fillStyle = "white";
-        Game.ctx.textAlign = "left";
-        Game.ctx.font = "bold 16px Kavivanar";
-        Game.ctx.fillText("Tiempo: " + Math.round(this.tiempoPartida),3,20);
+        if(Game.started) {
+            Game.ctx.fillStyle = "white";
+            Game.ctx.textAlign = "left";
+            Game.ctx.font = "bold 16px Kavivanar";
+            Game.ctx.fillText("Tiempo: " + Math.round(this.tiempoPartida), 3, 20);
+        }
     }
 }
 
+
+//Vidas del jugador
 var Life = function(lives) {
 
     Life.lives = lives;
@@ -463,6 +390,7 @@ var Life = function(lives) {
 
     this.step = function (dt) {
 
+        //Revisamos si ha muerto la rana, en ese caso se resta una vida y se reinicia el juego
         if (Life.muerte) {
 
             Life.lives--;
@@ -490,7 +418,6 @@ var Points = function(puntos) {
     Points.puntos =puntos;
 
     this.step = (dt) => {}
-
     this.draw =  (ctx) => {
 
         if(Game.started) {
@@ -501,3 +428,12 @@ var Points = function(puntos) {
         }
     }
 }
+
+
+var Water = function(object){
+    this.setup(object.sprite, object);
+}
+Water.prototype = new Sprite();
+Water.prototype.type = OBJECT_ENEMY;
+Water.prototype.step = function(){};
+Water.prototype.draw = function(){};

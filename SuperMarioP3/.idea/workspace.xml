@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4d85ee1c-4974-4df2-8b6a-a16d08de9f44" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine.js" beforeDir="false" afterPath="$PROJECT_DIR$/engine.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entities.js" beforeDir="false" afterPath="$PROJECT_DIR$/entities.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    <list default="true" id="b5e0be60-870a-42cf-97a0-22ed9e021b85" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../FroggerP2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../FroggerP2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FroggerP2/entities.js" beforeDir="false" afterPath="$PROJECT_DIR$/../FroggerP2/entities.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1r4cmvCwGgg02KgG3CC1Gpv79TN" />
+  <component name="ProjectId" id="1r9xOk9oxZWruoMemcoX0r1JOMC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -26,7 +30,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Frogger_Ronny/Frogger" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FroggerP2" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -37,24 +41,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ps95s\OneDrive\Documentos\Universidad\GitHub_Repositorios\DVI\FroggerP2\img" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ps95s\OneDrive\Documentos\Universidad\GitHub_Repositorios\DVI\FroggerP2" />
-      <recent name="C:\Users\ps95s\OneDrive\Documentos\Universidad\GitHub_Repositorios\DVI\FroggerP2\src" />
+      <recent name="C:\Users\ps95s\OneDrive\Documentos\Universidad\GitHub_Repositorios\DVI\SuperMarioP3" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4d85ee1c-4974-4df2-8b6a-a16d08de9f44" name="Default Changelist" comment="" />
-      <created>1618238964401</created>
+      <changelist id="b5e0be60-870a-42cf-97a0-22ed9e021b85" name="Default Changelist" comment="" />
+      <created>1618402077148</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1618238964401</updated>
-      <workItem from="1618238965752" duration="15788000" />
-      <workItem from="1618305799107" duration="28396000" />
-      <workItem from="1618405593616" duration="10129000" />
+      <updated>1618402077148</updated>
+      <workItem from="1618402078398" duration="6833000" />
     </task>
     <servers />
   </component>
@@ -71,6 +69,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

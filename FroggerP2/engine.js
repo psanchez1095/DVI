@@ -3,7 +3,7 @@ var Game = new function() {
     this.initialize = function(canvasElementId, sprite_data, callback) {
 
         Game.started = false;
-        Game.pulsado = false;
+        Game.pressed = false;
 
         this.canvas = document.getElementById(canvasElementId)
         this.width = this.canvas.width;
@@ -36,7 +36,7 @@ var Game = new function() {
         window.addEventListener('keyup',function(e) {
             if(KEY_CODES[e.keyCode]) {
                 Game.keys[KEY_CODES[e.keyCode]] = false;
-                Game.pulsado = false,
+                Game.pressed = false,
                 e.preventDefault();
             }
         },false);
