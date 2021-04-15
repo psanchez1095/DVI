@@ -1,0 +1,24 @@
+**tamaño de entre 1350 y 1950 px de ancho, y de 950 px de alto.**
+
+**Lo primero que tenemos que tener en cuenta es que necesitamos una imagen
+con un tamaño suficiente para que cubra la anchura de nuestra pantalla.**
+
+
+body {
+background-image: url(imagen.png);
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+background-color: black;
+}
+
+**Este código lo que hace es que cuando la pantalla sea menor de 799 píxeles, se cargará otra imagen más pequeña.
+Lo normal es que sea la misma imagen pero a un tamaño más pequeño (como mínimo de 799 píxeles).
+A partir de 799 píxeles se utilizará la imagen grande.**
+
+@media only screen and (max-width: 799px) {
+body {
+background-image: url(imagenPequeña);
+}
+}

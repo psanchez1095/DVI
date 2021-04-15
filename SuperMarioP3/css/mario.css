@@ -1,0 +1,32 @@
+
+html,body{
+    height:100vh;
+
+}
+
+body{
+    background-image: url("../images/backgroundHTMLMario.jpg") ;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+
+
+}
+img{
+    width :100%
+}
+
+canvas{
+    border: 15px solid black;
+    border-radius: 10%;
+    background-color: black;
+    margin-top: 24%;
+    margin-left: 40%;
+    object-fit: contain;
+    width: 100%;
+
+
+
+}
+
